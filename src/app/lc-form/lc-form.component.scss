@@ -1,0 +1,41 @@
+// /* lc-form.component.scss */
+// .topform,label{
+  
+
+// font-weight: bolder;
+//   width: 50%;
+//   height: 48%;
+// border-color: white;
+// //box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+// }
+// .topform{
+// align-content: center;
+// }
+
+// // .table-danger {
+// //     width: 100%;
+// //     border-collapse: collapse;
+// //   }
+  
+//   .table-danger th, .table-danger td {
+//     padding: 10px;
+//     text-align: left;
+//     border-bottom: 6px solid #ddd;
+//   }
+  
+  
+  
+  
+//   .bts-btn-success:hover {
+//     background-color: #218838;
+//   }
+.custom-radio-group{
+    display: flex;
+    gap:15px;
+}
+ 
+.custom-radio-button{
+    color: #3f51b5;
+    font-size: 5px;
+}

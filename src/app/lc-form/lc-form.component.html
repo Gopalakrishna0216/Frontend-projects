@@ -1,0 +1,209 @@
+<!-- <form [formGroup]="loginform">
+ 
+  <div class="topform">
+    <div *ngIf="editinguserId">
+      <label>UserId</label>
+      <input type="number" [value]="editinguserId" class="form-control" formControlName="userId" readonly>
+    </div>
+
+    <label>FirstName</label>
+    <div>
+      <input type="text" formControlName="firstName" class="form-control">
+      <div class="error" *ngIf="firstName?.invalid &&(submitted || firstName?.touched)">
+        <span class="error" *ngIf="firstName?.errors?.['required']" style="color: red;">Enter letters only</span>
+        <span class="error" *ngIf="firstName?.errors?.['minlength']" style="color:red">Enter Atleast 10letters</span>
+      </div>
+    </div> <br>
+
+    <label>lastName</label>
+    <div>
+      <input type="text" formControlName="lastName" class="form-control">
+      <div class="error" *ngIf="lastName?.invalid &&(submitted||lastName?.touched)">
+        <span class="error" *ngIf="lastName?.errors?.['required']" style="color: red;">Enter letters only</span>
+        <span class="error" *ngIf="lastName?.errors?.['minlength']" style="color: red;">Enter Atleat 10letters</span>
+      </div>
+    </div> <br>
+
+    <label>Email</label>
+    <div>
+      <input type="text" formControlName="email" class="form-control">
+      <div class="error" *ngIf="email?.invalid &&(submitted || email?.touched)">
+        <span class="error" *ngIf="email?.errors?.['required']" style="color: red;">Enter letters only</span>
+        <span class="error" *ngIf="email?.errors?.['email']" style="color: red;">Enter Atleat 10letters</span>
+      </div>
+    </div>
+    <br>
+
+    <button type="button"  class="btn btn-primary btn-lg" (click)="submit()">{{ editinguserId ? 'update' : 'submit' }}</button>
+  </div>
+
+  <table class="table table-success table-striped-columns">
+    <thead class="table-dark ">
+      <th>Id</th>
+      <th>FirstName</th>
+      <th>LastName</th>
+      <th>Email</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of user ">
+        <td>{{item.userId}}</td>
+        <td>{{item.firstName}}</td>
+        <td>{{item.lastName}}</td>
+        <td>{{item.email}}</td>
+        <td> 
+          <button (click)="edit(item.userId)"class="btn btn-success">Edit</button> &nbsp;
+          <button (click)="delete(item.userId)" class="btn btn-danger">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table> -->
+
+<form [formGroup]="loginform">
+  <div class="topform">
+
+    <!-- UserId Field -->
+    <div *ngIf="editinguserId">
+      <mat-form-field appearance="fill">
+        <mat-label>UserId</mat-label>
+        <input matInput type="number" formControlName="userId">
+      </mat-form-field>
+    </div>
+
+    <!-- First Name Field -->
+    <mat-form-field appearance="fill">
+      <mat-label>First Name</mat-label>
+      <input matInput formControlName="firstName" placeholder="Enter your first name">
+      <mat-error *ngIf="firstName?.errors?.['required']">First Name is required</mat-error>
+      <mat-error *ngIf="firstName?.errors?.['minlength']">Enter at least 10 letters</mat-error>
+    </mat-form-field>
+
+    <!-- Last Name Field -->
+    <mat-form-field appearance="fill">
+
+      <mat-label>Last Name</mat-label>
+      <input matInput formControlName="lastName" placeholder="Enter your last name">
+      <mat-error *ngIf="lastName?.errors?.['required']">Last Name is required</mat-error>
+      <mat-error *ngIf="lastName?.errors?.['minlength']">Enter at least 10 letters</mat-error>
+    </mat-form-field>
+
+
+    <!-- Email Field -->
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" placeholder="Enter your email">
+      <mat-error *ngIf="email?.errors?.['required']">Email is required</mat-error>
+      <mat-error *ngIf="email?.errors?.['email']">Enter a valid email address</mat-error>
+    </mat-form-field>
+    <!-- 
+    <mat-form-field appearance="fill">
+  
+    </mat-form-field> -->
+
+    <!-- Date Picker Field -->
+    <mat-form-field appearance="fill">
+      <mat-label>Date</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="dob">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <!-- <p>you Selected: {{selectedDate | date }}</p> -->
+
+
+    <!-- Radiobutton Field -->
+    <mat-radio-group formControlName="gender" class="custom-radio-group">
+      <mat-radio-button value="Male" class="custom-radio-button">Male</mat-radio-button>
+      <mat-radio-button value="Female" class="custom-radio-button">Female</mat-radio-button>
+      <mat-radio-button value="others" class="custom-radio-button">Others</mat-radio-button>
+    </mat-radio-group>
+
+ <!-- Dropdown Field -->
+  <mat-form-field appearance="fill">
+    <mat-label>Place</mat-label>
+    <mat-select formControlName="place">
+    <mat-option *ngFor="let place of places" [value]="place.value">
+      {{place.viewValue}}
+    </mat-option>
+  
+    </mat-select>
+  </mat-form-field>
+
+<!---this native dropdown---->
+  <!-- <mat-form-field>
+    <mat-label>Cars</mat-label>
+    <select matNativeControl required>
+      <option value="volvo">Volvo</option>
+      <option value="saab">Saab</option>
+      <option value="mercedes">Mercedes</option>
+      <option value="audi">Audi</option>
+    </select>
+  </mat-form-field> -->
+
+
+    <!-- <p>Selected: {{ selectedValue }}</p> -->
+
+    <!-- Submit Button -->
+    <button mat-raised-button color="primary" type="button" (click)="submit()">
+      {{ editinguserId ? 'Changedata' : 'Submit' }}
+    </button>
+  </div>
+</form>
+
+<!-- Material Table -->
+<table mat-table [dataSource]="user" class="mat-elevation-z8" multiTemplateDataRows>
+
+  <!-- User ID Column -->
+  <ng-container matColumnDef="userId">
+    <th mat-header-cell *matHeaderCellDef> ID </th>
+    <td mat-cell *matCellDef="let item"> {{item.userId}} </td>
+  </ng-container>
+
+  <!-- First Name Column -->
+  <ng-container matColumnDef="firstName">
+    <th mat-header-cell *matHeaderCellDef> First Name </th>
+    <td mat-cell *matCellDef="let item"> {{item.firstName}} </td>
+  </ng-container>&nbsp;
+
+  <!-- Last Name Column -->
+  <ng-container matColumnDef="lastName">
+    <th mat-header-cell *matHeaderCellDef> Last Name </th>
+    <td mat-cell *matCellDef="let item"> {{item.lastName}} </td>
+  </ng-container>&nbsp;
+
+  <!-- Email Column -->
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef> Email </th>
+    <td mat-cell *matCellDef="let item"> {{item.email}} </td>
+  </ng-container>&nbsp;
+
+  <ng-container matColumnDef="dob">
+    <th mat-header-cell *matHeaderCellDef> Dob </th>
+    <td mat-cell *matCellDef="let item"> {{item.dob}} </td>
+  </ng-container>&nbsp;
+
+  <ng-container matColumnDef="gender">
+    <th mat-header-cell *matHeaderCellDef> Gender </th>
+    <td mat-cell *matCellDef="let item"> {{item.gender}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="place">
+    <th mat-header-cell *matHeaderCellDef> Place </th>
+    <td mat-cell *matCellDef="let item"> {{item.place}} </td>
+  </ng-container>
+
+  <!-- Action Buttons -->
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef> Actions </th>
+    <td mat-cell *matCellDef="let item">
+      <button mat-icon-button color="primary" (click)="edit(item.userId)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" (click)="delete(item.userId)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <!-- Header and Row Definitions -->
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

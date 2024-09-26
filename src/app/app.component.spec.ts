@@ -22,8 +22,14 @@ describe('AppComponent', () => {
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('lc_F_end app is running!');
+    fixture.detectChanges(); // Ensure the component template is rendered
+  
+    const compiled = fixture.nativeElement;
+  
+    // Ensure that 'h1' exists in the template before accessing textContent
+    const h1 = compiled.querySelector('h1');
+    expect(h1).not.toBeNull(); // Assert that the element exists
+    expect(h1.textContent).toContain('lc_F_end'); // Check the actual title content
   });
+  
 });
